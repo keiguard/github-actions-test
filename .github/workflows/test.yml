@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       input-tag: ${{ steps.latest-tag-by-commitsha.outputs.tag_name }}
-      latest-tag: ${{ steps.latest-release.outputs.tag}}
+      latest-tag: ${{ steps.latest-release.outputs.tag }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -33,7 +33,9 @@ jobs:
         
       - name: Get latest release tag
         id: latest-release
-        run: echo "tag=$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)" >> $GITHUB_OUTPUT
+        run: |
+          echo "tag=$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)"
+          echo "tag=$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)" >> $GITHUB_OUTPUT
 
       - uses: cardinalby/git-get-release-action@1.2.4
         id: latest-tag-by-commitsha
@@ -46,7 +48,6 @@ jobs:
         run: |
           echo "Latest release tag: ${{ steps.latest-release.outputs.tag }}"
           echo "Latest tag by commit sha: ${{ steps.latest-tag-by-commitsha.outputs.tag_name }}"
-          echo "Input tag: ${{ steps.latest-tag-by-commitsha.outputs.tag_name }}"
         
   deploy:
     if: ${{ needs.setup.outputs.input-tag == needs.setup.outputs.latest-tag }}
