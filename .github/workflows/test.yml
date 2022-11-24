@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: opt-pro/optimum-docker
+          repository: keiguard/github-actions-test
           token: ${{ secrets.PAT_DEV }}
           ref: ${{ github.event.inputs.release-sha }}
           
