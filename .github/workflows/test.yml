@@ -44,10 +44,17 @@ jobs:
         with:
           commitSha: ${{ github.event.inputs.release-sha }}
           
-      - name: Debug outputs
+      - name: Debug Outputs
         run: |
           echo "Latest release tag: ${{ steps.latest-release.outputs.tag }}"
           echo "Latest tag by commit sha: ${{ steps.latest-tag-by-commitsha.outputs.tag_name }}"
+
+      - name: Latest Tag Check
+        if: ${{ needs.setup.outputs.input-tag == needs.setup.outputs.latest-tag }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('The inputted tag is not the latest!')
         
   deploy:
     if: ${{ needs.setup.outputs.input-tag == needs.setup.outputs.latest-tag }}
