@@ -34,7 +34,7 @@ jobs:
       - name: Get latest release tag
         id: latest-release
         run: |
-          echo "$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)"
+          git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1
           echo "tag=$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)" >> $GITHUB_OUTPUT
 
       - uses: cardinalby/git-get-release-action@1.2.4
