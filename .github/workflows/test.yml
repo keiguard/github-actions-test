@@ -26,7 +26,7 @@ jobs:
         with:
           repository: keiguard/github-actions-test
           token: ${{ secrets.PAT_DEV }}
-          fetch-depth: 10
+          fetch-depth: 50
           
       - name: Lowercase the repo name and username
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
@@ -34,7 +34,7 @@ jobs:
       - name: Get latest release tag
         id: latest-release
         run: |
-          echo "tag=$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)"
+          "$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)"
           echo "tag=$(git tag --sort=committerdate | grep -E '^v[0-9]' | tail -1)" >> $GITHUB_OUTPUT
 
       - uses: cardinalby/git-get-release-action@1.2.4
