@@ -26,7 +26,7 @@ jobs:
         with:
           repository: keiguard/github-actions-test
           token: ${{ secrets.PAT_DEV }}
-          ref: master
+          ref: main
           fetch-depth: 0
           
       - name: Lowercase the repo name and username
