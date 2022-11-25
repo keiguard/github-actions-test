@@ -51,7 +51,7 @@ jobs:
           echo "Latest tag by commit sha: ${{ steps.latest-tag-by-commitsha.outputs.tag_name }}"
 
       - name: Latest Tag Check
-        if: ${{ steps.latest-tag-by-commitsha.outputs.tag_name == steps.latest-release.outputs.tag }}
+        if: ${{ steps.latest-tag-by-commitsha.outputs.tag_name }} == ${{ steps.latest-release.outputs.tag }}
         uses: actions/github-script@v3
         with:
           script: |
