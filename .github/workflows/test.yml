@@ -26,7 +26,8 @@ jobs:
         with:
           repository: keiguard/github-actions-test
           token: ${{ secrets.PAT_DEV }}
-          fetch-depth: 25
+          ref: master
+          fetch-depth: 0
           
       - name: Lowercase the repo name and username
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
