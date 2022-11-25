@@ -55,7 +55,7 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            core.setFailed('The inputted tag is not the latest!')
+            core.setFailed('The inputted tag is not the latest !')
         
   deploy:
     if: ${{ needs.setup.outputs.input-tag == needs.setup.outputs.latest-tag }}
